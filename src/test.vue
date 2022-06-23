@@ -1,12 +1,26 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import { defineComponent, reactive, ref } from "vue";
+
+export default defineComponent({
+  props: ["background-color"],
+  setup() {
+    const messages = reactive([]);
+    const newMessage = ref("");
+  },
+});
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div>
+    <label>New Message</label>
+    <input v-model="newMessage" @keyup="checkEnter" autofocus />
+    <button @click="addMessage">Add Message</button>
+    <div class="messages">
+      <div v-for="msg in messages" :key="msg">
+        {{ msg }}
+      </div>
+    </div>
+  </div>
 </template>
 
 <style>
